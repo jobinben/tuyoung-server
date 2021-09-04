@@ -10,22 +10,46 @@
     <link rel="stylesheet" href="http://47.119.186.250:1114/tuyoung.css">
     <!-- 引入组件库 -->
     <script src="http://47.119.186.250:1114/tuyoung.umd.js"></script>
+
+    <style>
+        ul{
+        }
+    </style>
 </head>
 <body>
     <div id="app">
         <t-tabs :selected.sync="selectedTab">
             <t-tabs-head>
                 <template slot="actions">
-                    <t-button>更多</t-button>
+                    <t-button @click="onMore">更多</t-button>
                 </template>
             <t-tabs-item name="front">javscript </t-tabs-item>
             <t-tabs-item name="back"> css </t-tabs-item>
             <t-tabs-item name="stack"> icon </t-tabs-item>
             </t-tabs-head>
             <t-tabs-body>
-            <t-tabs-pane name="front">  前端</t-tabs-pane>
-            <t-tabs-pane name="back"> 后端战略 </t-tabs-pane>
-            <t-tabs-pane name="stack"> 全栈圈子 </t-tabs-pane>
+            <t-tabs-pane name="front">
+                <ul>
+                   <li v-for="i in jsList" :key="i">
+                       <a :href="`http://47.119.186.250:1114/${i}`">{{i}}</a>
+                   </li>
+                </ul>
+            </t-tabs-pane>
+            <t-tabs-pane name="back"> 
+                <ul>
+                    <li v-for="i in cssList" :key="i">
+                        <a :href="`http://47.119.186.250:1114/${i}`">{{i}}</a>
+                    </li>
+                 </ul>
+               
+            </t-tabs-pane>
+            <t-tabs-pane name="stack">
+                <ul>
+                    <li>
+                        <a href="http://47.119.186.250:1114/tuyoungSvg.js">图标矢量资源(SVG)</a>
+                    </li>
+                 </ul>
+            </t-tabs-pane>
             </t-tabs-body>
         </t-tabs>
     </div>
@@ -34,7 +58,25 @@
         const vm = new Vue({
             el: '#app',
             data: {
-                selectedTab: 'front'
+                selectedTab: 'front',
+                jsList: [
+                    'tuyoung.common.js',
+                    'tuyoung.common.js.map',
+                    'tuyoung.umd.js',
+                    'tuyoung.umd.js.map',
+                    'tuyoung.umd.min.js',
+                    'tuyoung.umd.min.js.map'
+                ],
+                cssList: [
+                    'tuyoung.css'
+                ],
+            },
+            methods: {
+                onMore() {
+                    this.$showToast({
+                        title: '没有更多啦'
+                    })
+                }
             }
         })
     </script>
